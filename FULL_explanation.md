@@ -48,6 +48,7 @@ This makes routing **adaptive**, **intelligent**, and **behavior-aware**.
 
 ## 2. System Architecture
 
+
 ### 2.1 Overall Architecture
 
 ```
