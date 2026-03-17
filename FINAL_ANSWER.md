@@ -110,7 +110,7 @@ Example: IoT sensor malfunction
 - Latency: 80ms (elevated)
 - Throughput: 15 Mbps (reduced)
 - Packet Loss: 15% (medium)
-- Jitter: 30ms (elevated)
+- `Jitter: 30ms (elevated)
 → Model outputs: 0.62 (62% anomaly probability)
 → Classification: SUSPICIOUS ⚠️
 → Action: Reroute via backup path

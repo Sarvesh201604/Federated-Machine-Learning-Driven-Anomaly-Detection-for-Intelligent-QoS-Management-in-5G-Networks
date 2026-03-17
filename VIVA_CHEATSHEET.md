@@ -134,6 +134,53 @@ Takes 20 seconds, shows all phases clearly.
 
 ---
 
+## WHAT IS MLP? (Multi-Layer Perceptron):
+"MLP is a feedforward artificial neural network with input, hidden, and output layers. It learns non-linear patterns through backpropagation."
+
+**Our Architecture:**
+```
+Input Layer (8 features) → Hidden Layer 1 (10 neurons) → Hidden Layer 2 (5 neurons) → Output (Normal/Anomaly)
+```
+
+**Configuration:**
+- Activation: ReLU (Rectified Linear Unit)
+- Optimizer: Adam (adaptive learning rate)
+- Learning Rate: 0.001
+- **Key Feature: warm_start=True** (enables incremental learning for FL)
+
+---
+
+## 8 FEATURES USED FOR TRAINING:
+1. **Latency** - Packet delay (ms)
+2. **Throughput** - Data rate (Mbps)
+3. **Packet Loss** - Loss percentage
+4. **Jitter** - Latency variation (ms)
+5. **Queue Length** - Packets in queue
+6. **Load** - Network utilization (0-1)
+7. **Traffic Type** - Protocol identifier
+8. **Label** - 0=Normal, 1=Anomaly (target)
+
+**Why these features?**
+"These are standard 5G QoS metrics that directly indicate network health and anomaly patterns. High latency + low throughput + high packet loss = clear anomaly signature."
+
+---
+
+## WHY MLP (NOT OTHER MODELS)?
+| Model | Why NOT Used |
+|-------|-------------|
+| Decision Tree | No incremental learning support |
+| CNN | Designed for images, overkill here |
+| LSTM/RNN | For time-series, we process individual packets |
+| Deep Neural Net | Needs GPU & more data, unnecessary |
+| **MLP ✅** | **Perfect balance: incremental + efficient + accurate** |
+
+---
+
+## IF THEY ASK ABOUT MLP:
+"MLP is our anomaly detection model. It's a neural network with 2 hidden layers (10 and 5 neurons) that processes 8 traffic features. We chose it because warm_start parameter enables incremental learning—critical for federated learning where models update over multiple rounds. It runs on CPU at base stations, achieving 88.3% accuracy. The model outputs anomaly probability used in routing cost calculation."
+
+---
+
 ## CONFIDENCE STATEMENT:
 "Our system achieved 48% latency improvement by making routing behavior-aware. This demonstrates the effectiveness of integrating federated learning with QoS routing for 5G networks."
 

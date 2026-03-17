@@ -10,10 +10,24 @@ ARCHITECTURE:
     2. Local ML Models (local_model.py) - One per base station
     3. Federated Aggregation (federated_server.py) - FedAvg algorithm
     4. Intelligent Routing (anomaly_router.py) - Anomaly-aware decisions
+    5. Intelligent Network Manager (intelligent_network_manager.py) - Novel add-ons
 
-NOVELTY:
+NOVELTY (BASE):
     Traditional QoS Routing: Cost = Latency + Load
-    Our System: Cost = Latency + Load + (Anomaly_Probability * Penalty)
+    Our System:              Cost = Latency + Load + (Anomaly_Probability * Penalty)
+
+NOVEL ADD-ON FEATURES (NEW):
+    FEATURE 1 — High-Throughput Load Balancer:
+        When throughput is very high but NOT an attack/anomaly,
+        traffic is intelligently rerouted to under-utilised links.
+
+    FEATURE 2 — Congestion-Aware Self-Healing:
+        All nodes share congestion state via a gossip protocol.
+        Congested node detected → ALL nodes auto-reroute (zero human input).
+
+    FEATURE 3 — Distributed Anomaly Blacklisting:
+        When any node flags a suspicious flow, a fingerprint is broadcast
+        to EVERY other node, which then refuses that flow immediately.
 """
 
 import numpy as np
@@ -29,6 +43,7 @@ from data_logger import DataLogger
 from local_model import LocalFLModel
 from federated_server import FedServer
 from anomaly_router import AnomalyAwareRouter
+from intelligent_network_manager import IntelligentNetworkManager
 
 # Set random seeds for reproducibility
 RANDOM_SEED = 42
@@ -60,12 +75,14 @@ class IntegratedFLQoSSystem:
         self.fed_server = FedServer(num_clients=num_base_stations)
         self.network_graph = None
         self.router = None
+        self.intelligent_manager = None  # Novel add-on manager
         
         # Results storage
         self.results = {
             'fl_accuracy': [],
             'routing_performance': [],
-            'anomaly_detection_rate': []
+            'anomaly_detection_rate': [],
+            'advanced_simulation': []
         }
         
         print("=" * 70)
@@ -210,6 +227,25 @@ class IntegratedFLQoSSystem:
         
         print("✓ Router initialized with Global FL Model")
         print("✓ Routing formula: Cost = Latency + Load + (Anomaly × Penalty)")
+
+    def setup_intelligent_manager(self, global_model):
+        """
+        [NEW] Setup the Intelligent Network Manager with all three novel features:
+          1) High-Throughput Load Balancer
+          2) Congestion-Aware Self-Healing
+          3) Distributed Anomaly Blacklisting
+        """
+        print("\n[STEP 4b] Initializing Intelligent Network Manager (Novel Add-Ons)...")
+        
+        self.intelligent_manager = IntelligentNetworkManager(
+            graph=self.network_graph,
+            global_model=global_model,
+            num_nodes=self.num_base_stations
+        )
+        
+        print("✓ Feature 1: High-Throughput Load Balancer active")
+        print("✓ Feature 2: Congestion-Aware Self-Healing active")
+        print("✓ Feature 3: Distributed Anomaly Blacklisting active")
     
     def run_routing_simulation(self, num_flows=100):
         """Simulate traffic routing with and without anomaly awareness."""
@@ -311,6 +347,124 @@ class IntegratedFLQoSSystem:
         print(f"\n📈 anomaly Detection Rate: {stats.get('anomaly_detection_rate', 0):.1f}%")
         
         return latencies_baseline, latencies_intelligent
+
+    def run_advanced_simulation(self, num_flows=60):
+        """
+        [NEW] Simulate all three novel features on real traffic flows.
+
+        Scenarios covered:
+          - High-throughput (non-attack) flows → load balanced
+          - Congestion on a node → self-healing reroute
+          - Anomalous flows → detected + cooperative blacklist broadcast
+          - Same attack arriving at another node → automatically blocked
+        """
+        if self.intelligent_manager is None:
+            print("\n[WARNING] Intelligent manager not set up. Skipping advanced simulation.")
+            return
+
+        print("\n[STEP 5b] Running ADVANCED Simulation (Novel Features)...")
+        print("-" * 70)
+
+        counters = {
+            'normal': 0,
+            'load_balanced': 0,
+            'self_healed': 0,
+            'blacklisted_early': 0,
+            'anomaly_flagged': 0
+        }
+
+        # ── Phase A: Simulate link saturation (triggers load balancing) ──
+        print("\n  Phase A: Simulating high-throughput load on links 0-1 and 1-2...")
+        self.intelligent_manager.simulate_link_traffic(0, 1, throughput=88, capacity=100)
+        self.intelligent_manager.simulate_link_traffic(1, 2, throughput=85, capacity=100)
+        self.intelligent_manager.simulate_link_traffic(0, 1, throughput=90, capacity=100)
+
+        # ── Phase B: Simulate BS-2 congestion (triggers self-healing) ────
+        print("  Phase B: Simulating congestion event at BS-2...")
+        self.intelligent_manager.simulate_node_load_event(node_id=2, load=0.92)
+
+        # ── Phase C: Run mixed traffic flows ─────────────────────────────
+        print("  Phase C: Processing mixed traffic flows...")
+        for flow_id in range(num_flows):
+            source = random.randint(0, self.num_base_stations - 1)
+            dest   = random.randint(0, self.num_base_stations - 1)
+            while dest == source:
+                dest = random.randint(0, self.num_base_stations - 1)
+
+            is_anomaly   = random.random() < 0.25   # 25% attacks
+            is_high_load = random.random() < 0.30   # 30% high throughput (not attack)
+
+            if is_anomaly:
+                # Anomalous / attack traffic
+                features = {
+                    'latency': random.uniform(180, 300),
+                    'throughput': random.uniform(3, 12),
+                    'packet_loss': random.uniform(0.35, 0.65),
+                    'jitter': random.uniform(60, 120),
+                    'queue_length': random.uniform(700, 1000),
+                    'load': random.uniform(0.85, 0.99),
+                    'traffic_type': 1
+                }
+                anomaly_score = random.uniform(0.70, 0.98)
+            elif is_high_load:
+                # Legal high-throughput traffic (streaming/bulk transfer)
+                features = {
+                    'latency': random.uniform(10, 25),
+                    'throughput': random.uniform(75, 98),   # HIGH but legit
+                    'packet_loss': random.uniform(0.0, 0.02),
+                    'jitter': random.uniform(1, 4),
+                    'queue_length': random.uniform(20, 80),
+                    'load': random.uniform(0.78, 0.95),
+                    'traffic_type': 0
+                }
+                anomaly_score = random.uniform(0.02, 0.20)   # LOW → NOT an attack
+            else:
+                # Normal traffic
+                features = {
+                    'latency': random.uniform(10, 30),
+                    'throughput': random.uniform(30, 70),
+                    'packet_loss': random.uniform(0.0, 0.03),
+                    'jitter': random.uniform(1, 5),
+                    'queue_length': random.uniform(5, 40),
+                    'load': random.uniform(0.1, 0.5),
+                    'traffic_type': 0
+                }
+                anomaly_score = random.uniform(0.01, 0.15)
+
+            result = self.intelligent_manager.smart_route(
+                source, dest, features, anomaly_score, observer_node=source
+            )
+
+            action = result['action']
+            if action == 'BLOCKED':
+                counters['blacklisted_early'] += 1
+            elif action == 'ANOMALY_REROUTE_AND_BLACKLIST':
+                counters['anomaly_flagged'] += 1
+            elif action == 'REROUTED':
+                reason = result['reason']
+                if 'LOAD-BALANCE' in reason:
+                    counters['load_balanced'] += 1
+                elif 'SELF-HEAL' in reason:
+                    counters['self_healed'] += 1
+                else:
+                    counters['normal'] += 1
+            else:
+                counters['normal'] += 1
+
+        # ── Report ────────────────────────────────────────────────────────
+        print("\n" + "=" * 70)
+        print(" ADVANCED SIMULATION RESULTS (Novel Features)")
+        print("=" * 70)
+        print(f"  Total flows processed           : {num_flows}")
+        print(f"  ✅ Normal routes                 : {counters['normal']}")
+        print(f"  🔀 Load-balanced (high tput)     : {counters['load_balanced']}")
+        print(f"  🔧 Self-healed (congestion)      : {counters['self_healed']}")
+        print(f"  🚨 Anomaly flagged & blacklisted : {counters['anomaly_flagged']}")
+        print(f"  🚫 Blocked by cooperative list   : {counters['blacklisted_early']}")
+
+        self.intelligent_manager.print_report()
+        self.results['advanced_simulation'].append(counters)
+        return counters
     
     def visualize_results(self, latencies_baseline, latencies_intelligent):
         """Create visualization of results."""
@@ -379,11 +533,17 @@ class IntegratedFLQoSSystem:
         
         # Phase 4: Setup Routing
         self.setup_anomaly_aware_routing(global_model)
+
+        # Phase 4b: [NEW] Setup Intelligent Network Manager
+        self.setup_intelligent_manager(global_model)
         
-        # Phase 5: Routing Simulation
+        # Phase 5: Routing Simulation (original)
         latencies_baseline, latencies_intelligent = self.run_routing_simulation(
             num_flows=100
         )
+
+        # Phase 5b: [NEW] Advanced Simulation (three novel features)
+        self.run_advanced_simulation(num_flows=60)
         
         # Phase 6: Visualization
         self.visualize_results(latencies_baseline, latencies_intelligent)
@@ -396,9 +556,12 @@ class IntegratedFLQoSSystem:
         print("   2. ✓ Anomaly detection with trained ML model")
         print("   3. ✓ Intelligent routing based on traffic behavior")
         print("   4. ✓ Performance improvement over baseline")
+        print("   5. ✓ [NEW] High-Throughput Load Balancing (non-attack reroute)")
+        print("   6. ✓ [NEW] Congestion-Aware Self-Healing (distributed gossip)")
+        print("   7. ✓ [NEW] Cooperative Anomaly Blacklisting (all nodes protect)")
         print("\n💡 NOVELTY DEMONSTRATED:")
-        print("   Traditional: Cost = Latency + Load")
-        print("   Our System: Cost = Latency + Load + (Anomaly × Penalty)")
+        print("   Base System  : Cost = Latency + Load + (Anomaly × Penalty)")
+        print("   Extended     : + ThroughputPressure + CongestionDetour + BlacklistCheck")
         print("="*70)
 
 

@@ -1,0 +1,72 @@
+﻿
+======================================================================
+  INTELLIGENT NETWORK MANAGER ΓÇö STANDALONE DEMO
+======================================================================
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+DEMO 1: HIGH THROUGHPUT ΓÇö Not an attack, needs load balancing
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Action  : NORMAL
+  Path    : [0, 4, 3]
+  Reason  : NORMAL_ROUTE
+  Rerouted: False
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+DEMO 2: NODE CONGESTION ΓåÆ SELF-HEALING auto-reroute
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  ≡ƒöö [SELF-HEAL] Congestion alert from BS-2 propagated to 4 nodes over 3 hops
+  Action  : REROUTED
+  Path    : [0, 4]
+  Reason  : [SELF-HEAL] SELF_HEALED: avoided congested nodes [2], new path: [0, 4] | 
+  Rerouted: True
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+DEMO 3: ANOMALY DETECTED ΓåÆ blacklist broadcast to all nodes
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  ≡ƒÜ¿ [BLACKLIST] BS-0 flagged flow [e47b54acb47d] (score=0.89) ΓåÆ broadcast to ALL 5 nodes
+  Action  : ANOMALY_REROUTE_AND_BLACKLIST
+  Path    : [0, 4]
+  Reason  : [SELF-HEAL] SELF_HEALED: avoided congested nodes [2], new path: [0, 4] | [ANOMALY_REPORTED] fingerprint=e47b54acb47d | 
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+DEMO 4: SAME ATTACK reaches BS-3 ΓåÆ blocked by cooperative blacklist!
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Action  : BLOCKED
+  Reason  : [BLACKLIST] BLACKLISTED at BS-3: fingerprint=e47b54acb47d, originally detected by BS-0, score=0.89
+
+======================================================================
+ INTELLIGENT NETWORK MANAGER ΓÇö FULL REPORT
+======================================================================
+
+≡ƒôè OVERALL STATS:
+   total_flows                        : 4
+   blocked_blacklisted                : 1
+   rerouted_load_balance              : 0
+   rerouted_self_heal                 : 2
+   normal_routes                      : 1
+
+≡ƒöÇ LOAD BALANCER STATS:
+   total_checks                       : 3
+   rerouted_high_throughput           : 0
+   not_rerouted_anomaly               : 0
+   flows_load_balanced                : 0
+
+≡ƒöº SELF-HEALER STATS:
+   congestion_events                  : 1
+   self_healing_reroutes              : 2
+   alerts_propagated                  : 12
+   recoveries                         : 0
+
+≡ƒÜ½ BLACKLIST STATS:
+   alerts_sent                        : 1
+   flows_blocked_early                : 1
+   blacklist_entries_total            : 5
+   expired_entries_cleaned            : 0
+
+≡ƒôí CONGESTION MAP (per node):
+   BS-0: ≡ƒƒó OK  load=0.00
+   BS-1: ≡ƒƒó OK  load=0.00
+   BS-2: ≡ƒö┤ CONGESTED  load=0.91
+   BS-3: ≡ƒƒó OK  load=0.00
+   BS-4: ≡ƒƒó OK  load=0.00
+======================================================================

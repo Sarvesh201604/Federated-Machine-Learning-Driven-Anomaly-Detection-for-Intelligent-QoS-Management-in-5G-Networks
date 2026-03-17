@@ -1,5 +1,56 @@
 # TECHNICAL DEEP DIVE - FOR DETAILED VIVA QUESTIONS 🎓
 
+## 🔍 QUESTION: "WHY ARE YOU CALLING THIS 5G? WHY NOT 4G OR 6G?"
+
+This is the most important clarification. Your reviewer is correct that topology alone does not prove 5G.
+
+### Precise Classification (Use this sentence)
+
+"Our work is a **5G-oriented QoS management simulation**, not a full 3GPP end-to-end implementation. We call it 5G because the design assumptions, traffic classes, latency/reliability targets, and distributed gNB-side intelligence match 5G network behavior more than 4G, while not including 6G-only features."
+
+### What Makes It 5G-Oriented in This Project
+
+1. **gNB/base-station-centric distributed operation**
+    - The system models multiple base stations and local intelligence per station.
+    - Federated learning at each station matches edge-distributed control style used in 5G deployments.
+
+2. **QoS differentiation across heterogeneous services**
+    - The project uses different service behaviors (video, IoT, emergency) with different QoS needs.
+    - This is aligned with 5G multi-service operation (high bandwidth + massive devices + critical traffic).
+
+3. **Latency/reliability-aware routing objective**
+    - Routing is not shortest-path only; it jointly considers latency, load, and anomaly risk.
+    - This fits 5G intent: maintaining service quality under dynamic conditions.
+
+4. **Near-real-time decision requirement**
+    - Inference and routing updates are designed for fast online operation, which is expected in 5G RAN optimization workflows.
+
+### Why It Is Not Just "Any Generation"
+
+**Why not pure 4G framing:**
+- 4G studies are usually less focused on strict multi-service QoS orchestration with distributed AI at the edge.
+- Your design emphasizes distributed learning and traffic-class-aware protection, which is closer to 5G operational goals.
+
+**Why not 6G framing:**
+- 6G usually implies additional assumptions (for example: native semantic communication, integrated sensing, THz-scale operation, sub-ms E2E targets, AI-native air interface control).
+- Those mechanisms are not modeled here, so labeling as 6G would be overclaiming.
+
+### Honest Scope Statement (Very Important in Viva)
+
+Say this clearly:
+
+"We do **not** claim full 5G protocol-stack implementation (for example, full 3GPP RAN/Core signaling). We claim a 5G-oriented systems-level simulation for FL-driven anomaly-aware QoS routing."
+
+This answer is strong because it is technically honest and still defends your contribution.
+
+### If Reviewer Says "This is Fuzzy"
+
+Use this structured response:
+
+"You are right that naming can become fuzzy without criteria. So we define our criteria explicitly: (1) distributed gNB-style learning, (2) differentiated QoS classes, (3) latency/reliability-aware control loop, and (4) real-time anomaly-aware routing decisions. On these criteria, the work is 5G-oriented. We also explicitly state it is simulation-level, not full-stack 5G deployment."
+
+---
+
 ## 🔍 QUESTION: "HOW DO YOU FIND ANOMALIES?"
 
 ### Answer in 3 Levels:
@@ -242,7 +293,7 @@ INPUT LAYER (8 neurons)
      queue_length, load, traffic_type, previous_label]
     ↓
 HIDDEN LAYER 1 (10 neurons) - ReLU activation
-    ↓
+    ↓`
 HIDDEN LAYER 2 (5 neurons) - ReLU activation
     ↓
 OUTPUT LAYER (2 neurons) - Softmax activation
