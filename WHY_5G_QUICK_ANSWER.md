@@ -51,10 +51,29 @@ Your Project: 2024-2026 = 5G prime time
 - Follows 5G distributed model
 - Matches 5G edge computing
 
-### 2. **5G QoS Requirements** ✅
-- eMBB (mobile broadband): <4ms ✓
-- URLLC (ultra-reliable): <1ms ✓ (our inference is <1ms!)
-- mMTC (massive IoT): <10ms ✓
+### 2. **The Exact 5G Service Types & Features to Compare** 🔢
+If they ask what these services mean and exactly which dataset features prove our system protects them:
+
+*   📶 **1. eMBB (Enhanced Mobile Broadband)**
+    *   **Meaning:** High-speed data services.
+    *   **Example:** Video streaming, Gaming, AR/VR. (Key idea: High bandwidth).
+    *   **5G Target:** Peak data rates of `20 Gbps`.
+    *   **👉 FEATURE TO COMPARE in our dataset:** `sload` (Source Load), `dload` (Destination Load), and `rate` (Packets per second).
+    *   **Our Proof:** By monitoring `sload`, `dload`, and `rate`, our AI ensures that a hacker isn't flooding the network with fake traffic that ruins the high-speed streaming experience.
+
+*   ⚡ **2. URLLC (Ultra-Reliable Low Latency Communication)**
+    *   **Meaning:** Very fast + very reliable communication.
+    *   **Example:** Emergency services, Remote surgery, Autonomous cars. (Key idea: Low delay + high reliability).
+    *   **5G Target:** `1 ms` latency and `99.999%` packet reliability.
+    *   **👉 FEATURE TO COMPARE in our dataset:** `tcprtt` (TCP Round-Trip Time), `synack`, `ackdat`, `sjit` (Source Jitter), and `djit` (Destination Jitter).
+    *   **Our Proof:** These exact features record millisecond-level latency. If an attack inflates `tcprtt` to 100+ ms, our system blocks it instantly to protect the URLLC slice.
+
+*   📡 **3. mMTC (Massive Machine Type Communication)**
+    *   **Meaning:** Huge number of devices connected simultaneously.
+    *   **Example:** IoT sensors, Smart city meters, Agricultural monitors. (Key idea: Many devices at once).
+    *   **5G Target:** Up to `1,000,000 devices per square kilometer`.
+    *   **👉 FEATURE TO COMPARE in our dataset:** **The immense scale of network flows (Number of Rows/Connections)**.
+    *   **Our Proof:** The dataset contains hundreds of thousands of individual network flows. A central 4G server cannot process this much data in real-time. Our system uses 5G Federated Edge Computing at local Base Stations (gNBs) to process these massive flows locally without dragging down the core network.
 
 ### 3. **5G Problems** ✅
 - Diverse traffic management

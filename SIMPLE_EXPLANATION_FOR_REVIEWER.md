@@ -112,9 +112,9 @@ Here's the **simple answer** for each feature:
 
 **Reason 1: QoS Relevance** 🎯  
 These 8 features directly impact what users care about:
-- **sload, dload, rate** affect how fast data flows (throughput)
-- **sjit, djit, tcprtt** affect how quickly data arrives (latency)
-- **synack, ackdat** affect connection reliability
+- **sload (Source Load), dload (Destination Load), rate (Packet Rate):** These affect how fast data flows (throughput).
+- **sjit (Source Jitter), djit (Destination Jitter), tcprtt (TCP Round-Trip Time):** These affect how quickly and smoothly data arrives (latency and stability).
+- **synack (SYN-ACK Time), ackdat (ACK-DATA Time):** These affect connection reliability (how fast a connection is established and how quickly data receipt is confirmed).
 
 Other features in the dataset (like IP addresses, port numbers) don't tell us about Quality of Service.
 
